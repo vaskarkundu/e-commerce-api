@@ -16,7 +16,7 @@ app.use(cors());
 // require("./modules/auth/config/passport");
 
 // // Routes
-// app.use("/v1", require("./modules/auth/route"));
+app.use("/api/v1", require("./module/auth/route"));
 // app.use("/v1/products", require("./modules/product/route"));
 // app.use("/v1/collections", require("./modules/collections/route"));
 module.exports = app;
