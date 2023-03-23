@@ -10,13 +10,13 @@ const crypto = require("crypto");
 const AuthCtrl = require("./controllers/auth.controller");
 
 //register route
-router.post("/singup", AuthCtrl.SingUp);
+router.post("/signup", AuthCtrl.SingUp);
 
 // //verify route
 // router.post("/verify", AuthCtrl.Verify);
 
 // //login route
-router.post("/login", AuthCtrl.SingIn);
+router.post("/signin", AuthCtrl.SingIn);
 // //protected route
 // router.get(
 //   "/protected",
