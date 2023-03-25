@@ -1,4 +1,3 @@
-# KaizenFlow ExpressJS API Starter Template
 
 ## Setup
 
