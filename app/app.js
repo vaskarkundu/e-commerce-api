@@ -11,12 +11,12 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cors());
 
-// // passport
-// app.use(passport.initialize());
-// require("./modules/auth/config/passport");
+// passport
+app.use(passport.initialize());
+require("./module/auth/config/passport");
 
 // // Routes
 app.use("/api/v1", require("./module/auth/route"));
-// app.use("/v1/products", require("./modules/product/route"));
+app.use("/api/v1/products", require("./module/product/route"));
 // app.use("/v1/collections", require("./modules/collections/route"));
 module.exports = app;
