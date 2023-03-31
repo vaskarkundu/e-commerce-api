@@ -16,11 +16,25 @@ module.exports = function (options, populate) {
         model.populate({ path: field });
       }
     }
-    model.exec((err, doc) => {
-      if (err) return next(err);
-      if (!doc) return next(404);
-      req["model"] = doc;
-      next();
-    });
+    // await model.exec((err, doc) => {
+    //   try {
+    //     if (err) return next(err);
+    //     if (!doc) return next(404);
+    //     req["model"] = doc;
+    //     next();
+    //   } catch (err) {
+    //     next(err);
+    //   }
+    // });
+    model
+      .exec()
+      .then((doc) => {
+        if (!doc) throw new Error(404);
+        req["model"] = doc;
+        next();
+      })
+      .catch((err) => {
+        next(err);
+      });
   };
 };
