@@ -26,6 +26,7 @@ exports.SingUp = async (req, res) => {
     return res.status(200).json({ message: "User Created successfully" });
   } catch (error) {
     console.log(error);
+    return res.status(500).json({ message: "Internal Server Error" });
   }
 };
 
@@ -53,5 +54,8 @@ exports.SingIn = async (req, res) => {
     return res
       .status(200)
       .json({ message: "Sign in successfull", token: token });
-  } catch (error) {}
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json({ message: "Internal Server Error" });
+  }
 };
