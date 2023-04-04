@@ -3,6 +3,7 @@ const router = express.Router();
 const passport = require("passport");
 
 const CartCtrl = require("./controllers/cart.controller");
+const ItemCart = require("./controllers/items.controller");
 
 const CartModel = require("./models/cart.model");
 const Middlewares = require("../core/middlewares/index");
@@ -16,13 +17,13 @@ router.post(
   CartCtrl.Create
 );
 
-// router.put(
-//   "/:id/edit",
-//   passport.authenticate("jwt", { session: false }),
-//   (req, res, next) => next(),
-//   [LoadProduct],
-//   ProductCtrl.Update
-// );
+router.put(
+  "/:id/edit",
+  passport.authenticate("jwt", { session: false }),
+  (req, res, next) => next(),
+  [LoadCart],
+  CartCtrl.Update
+);
 
 router.get(
   "/:id/detail",
@@ -40,6 +41,20 @@ router.post(
   CartCtrl.Remove
 );
 
+router.post(
+  "/:id/addproduct/",
+  passport.authenticate("jwt", { session: false }),
+  (req, res, next) => next(),
+  [LoadCart],
+  ItemCart.AddToItem
+);
+router.post(
+  "/:id/removeproduct/",
+  passport.authenticate("jwt", { session: false }),
+  (req, res, next) => next(),
+
+  ItemCart.RemoveItem
+);
 // router.get(
 //   "/index",
 //   passport.authenticate("jwt", { session: false }),

@@ -1,5 +1,4 @@
 const CartRepo = require("../../cart/repositories/cart.repository");
-const CartModel = require("../models/cart.model");
 
 exports.Create = async (req, res) => {
   let cart = { ...req.body, user: req.user._id };
@@ -16,20 +15,20 @@ exports.Create = async (req, res) => {
   }
 };
 
-// exports.Update = async (req, res) => {
-//   let product = req.model;
-//   try {
-//     Object.assign(product, req.body);
-//     await product.save();
-//     return res.json({
-//       message: "Product updated successfully",
-//       data: product,
-//     });
-//   } catch (error) {
-//     console.log(error);
-//     return res.status(500).json({ message: "Internal Server Error" });
-//   }
-// };
+exports.Update = async (req, res) => {
+  let cart = req.model;
+  try {
+    Object.assign(cart, req.body);
+    await cart.save();
+    return res.json({
+      message: "Cart updated successfully",
+      data: cart,
+    });
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json({ message: "Internal Server Error" });
+  }
+};
 
 exports.Read = async (req, res) => {
   const cartID = req.params.id;

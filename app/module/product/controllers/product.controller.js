@@ -1,6 +1,6 @@
 const ProductRepo = require("../../product/repositories/product.repository");
 
-exports.Create = async (req, res, next) => {
+exports.Create = async (req, res) => {
   try {
     let product = req.body;
     product.slug = `${product.name
@@ -14,11 +14,12 @@ exports.Create = async (req, res, next) => {
       data: _product,
     });
   } catch (error) {
-    return next(error);
+    console.log(error);
+    return res.status(500).json({ message: "Internal Server Error" });
   }
 };
 
-exports.Update = async (req, res, next) => {
+exports.Update = async (req, res) => {
   let product = req.model;
   try {
     Object.assign(product, req.body);
@@ -28,11 +29,12 @@ exports.Update = async (req, res, next) => {
       data: product,
     });
   } catch (error) {
-    next(error);
+    console.log(error);
+    return res.status(500).json({ message: "Internal Server Error" });
   }
 };
 
-exports.Details = async (req, res, next) => {
+exports.Details = async (req, res) => {
   let product = req.model;
   try {
     if (!product) {
@@ -40,18 +42,20 @@ exports.Details = async (req, res, next) => {
     }
     res.status(200).json({ message: "Here is the product", data: product });
   } catch (error) {
-    next(error);
+    console.log(error);
+    return res.status(500).json({ message: "Internal Server Error" });
   }
 };
 
-exports.Remove = async (req, res, next) => {
+exports.Remove = async (req, res) => {
   let productID = req.params.id;
   try {
     await ProductRepo.Delete({ _id: productID });
 
     return res.json({ message: "Product removed successfully" });
   } catch (error) {
-    next(error);
+    console.log(error);
+    return res.status(500).json({ message: "Internal Server Error" });
   }
 };
 
@@ -80,5 +84,10 @@ exports.Remove = async (req, res, next) => {
 // };
 
 exports.Index = async (req, res) => {
-  res.json(res.paginatedResults);
+  try {
+    res.json(res.paginatedResults);
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json({ message: "Internal Server Error" });
+  }
 };
