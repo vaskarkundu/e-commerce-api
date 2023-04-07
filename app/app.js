@@ -19,4 +19,6 @@ require("./module/auth/config/passport");
 app.use("/api/v1", require("./module/auth/route"));
 app.use("/api/v1/products", require("./module/product/route"));
 app.use("/api/v1/cart", require("./module/cart/route"));
+app.use("/api/v1/order", require("./module/order/route"));
+
 module.exports = app;
